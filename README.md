@@ -22,7 +22,7 @@ git remote add turfgame_exporter dokku@<host_running_dokku>:turfgame_exporter
 ###### Deploy with git push
 
 ```
-$ git push turfgame_expoter master
+$ git push turfgame_exporter master
 ```
 
 ## Configuration
