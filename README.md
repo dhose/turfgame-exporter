@@ -2,6 +2,29 @@
 
 Flask application that exposes user metrics from [Turf](https://turfgame.com/) to [Prometheus](https://prometheus.io/). The application is built as an [12-factor](https://12factor.net/) app and uses Redis as backing service.
 
+## Deployment using Dokku
+
+###### On host running Dokku
+
+```
+$ dokku apps:create turfgame_exporter && \
+  dokku redis:create turfgame_exporter && \
+  dokku redis:link turfgame_exporter turfgame_exporter && \
+  dokku config:set turfgame_exporter TURF_USERS=<turf username>
+```
+
+###### In a directory containing a clone of this repository
+
+```
+git remote add turfgame_exporter dokku@<host_running_dokku>:turfgame_exporter
+```
+
+###### Deploy with git push
+
+```
+$ git push turfgame_expoter master
+```
+
 ## Configuration
 
 Configuration is done using environment variables.
@@ -15,11 +38,11 @@ Configuration is done using environment variables.
 
 ### Optional
 
-| Environment variable | Default value                     | Description                                            |
-| -------------------- | --------------------------------- | ------------------------------------------------------ |
-| TURF_API_USERS_URL   | https://api.turfgame.com/v4/users | Turf API enpoint                                       |
-| CHECK_INTERVAL_SEC   | 300                               | Interval in which statistics is updated from Turf API. |
-| LOGLEVEL             | INFO                              | Set loglevel                                           |
+| Environment variable | Default value                     | Description                                           |
+| -------------------- | --------------------------------- | ----------------------------------------------------- |
+| TURF_API_USERS_URL   | https://api.turfgame.com/v4/users | Turf API enpoint                                      |
+| CHECK_INTERVAL_SEC   | 300                               | Interval in which statistics is polled from Turf API. |
+| LOGLEVEL             | INFO                              | Set loglevel                                          |
 
 ## Example output
 
