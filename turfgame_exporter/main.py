@@ -97,7 +97,7 @@ def update_stats_in_redis(statistics):
                 redis_key = '{}.{}.{}'.format(REDIS_METRIC_PREFIX, user_stat['name'], key)
                 REDISCONN.set(redis_key, value)
 
-@celery.task(bind=True, default_retry_delay=30, max_retries=120)
+@celery.task(bind=True)
 def get_users_statistics(self):
     """ Scheduled task that every CHECK_INTERVAL_SEC updates statistics from Turf API """
     self.body = generate_body()
