@@ -45,7 +45,7 @@ app.config['CELERYBEAT_SCHEDULE'] = {
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
-REDIS_METRIC_PREFIX = 'turfgame'
+REDIS_METRIC_PREFIX = 'turfgame_user'
 
 ACCEPTED_METRICS = [
     {'turf_name': 'zones', 'prometheus_name': 'zones_owned',
