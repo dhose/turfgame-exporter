@@ -2,7 +2,7 @@
 
 Flask application that exposes user metrics from [Turf](https://turfgame.com/) to [Prometheus](https://prometheus.io/). The application is built as an [12-factor](https://12factor.net/) app and uses Redis as backing service.
 
-## Deployment using Dokku
+## Deployment using [Dokku](https://github.com/dokku)
 
 ###### On host running Dokku
 
