@@ -104,7 +104,7 @@ def get_users_statistics(self):
     self.headers = {'Content-Type': 'application/json'}
 
     try:
-        self.response = requests.post(TURF_API_USERS_URL, headers=self.headers, json=self.body)
+        self.response = requests.post(TURF_API_USERS_URL, headers=self.headers, json=self.body, timeout=2)
 
         if self.response.status_code == 200:
             update_stats_in_redis(self.response.json())
