@@ -45,7 +45,7 @@ app.config['CELERYBEAT_SCHEDULE'] = {
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
-REDIS_METRIC_PREFIX = 'turfgame_user'
+REDIS_KEY_PREFIX = 'turfgame_user'
 
 ACCEPTED_METRICS = [
     {'turf_name': 'zones', 'prometheus_name': 'zones_owned',
@@ -94,7 +94,7 @@ def update_stats_in_redis(statistics):
                 if key == 'zones':
                     value = len(value)
 
-                redis_key = '{}.{}.{}'.format(REDIS_METRIC_PREFIX, user_stat['name'], key)
+                redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
                 REDISCONN.set(redis_key, value)
 
 @celery.task(bind=True)
@@ -119,26 +119,26 @@ def generate_response(metric):
     """ Returns response for specific metric """
     metric_response = []
     metric_response.append('# HELP {}_{} {}'.format(
-        REDIS_METRIC_PREFIX,
+        REDIS_KEY_PREFIX,
         metric['prometheus_name'],
         metric['help']))
     metric_response.append('# TYPE {}_{} {}'.format(
-        REDIS_METRIC_PREFIX,
+        REDIS_KEY_PREFIX,
         metric['prometheus_name'],
         metric['type'].lower()))
 
     for user in TURF_USERS:
         try:
-            value = REDISCONN.get('{}.{}.{}'.format(REDIS_METRIC_PREFIX, user, metric['turf_name']))
+            value = REDISCONN.get('{}.{}.{}'.format(REDIS_KEY_PREFIX, user, metric['turf_name']))
             metric_response.append('{}_{}{{user="{}"}} {}'.format(
-                REDIS_METRIC_PREFIX,
+                REDIS_KEY_PREFIX,
                 metric['prometheus_name'],
                 user,
                 int(value)))
 
         except TypeError:
             log.error('%s.%s.%s does not exist in Redis.',
-                      REDIS_METRIC_PREFIX,
+                      REDIS_KEY_PREFIX,
                       user,
                       metric['turf_name'])
             continue
