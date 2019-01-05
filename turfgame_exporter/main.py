@@ -11,7 +11,6 @@ import sys
 import datetime
 from flask import Flask
 from celery import Celery
-import requests
 import redis
 
 # Environment variables
@@ -36,14 +35,15 @@ app = Flask(__name__)
 app.config['CELERY_BROKER_URL'] = REDIS_URL
 app.config['CELERYBEAT_SCHEDULE'] = {
     'get_users_statistics': {
-        'task': 'turfgame_exporter.main.get_users_statistics',
-        'schedule': datetime.timedelta(seconds=(int(CHECK_INTERVAL_SEC)))
+        'task': 'turfgame_exporter.tasks.get_users_statistics',
+        'schedule': datetime.timedelta(seconds=(int(CHECK_INTERVAL_SEC))),
     }
 }
 
 # Initialize Celery
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
+celery.autodiscover_tasks(['turfgame_exporter'])
 
 REDIS_KEY_PREFIX = 'turfgame_user'
 
@@ -96,24 +96,6 @@ def update_stats_in_redis(statistics):
 
                 redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
                 REDISCONN.set(redis_key, value)
-
-@celery.task(bind=True)
-def get_users_statistics(self):
-    """ Scheduled task that every CHECK_INTERVAL_SEC updates statistics from Turf API """
-    self.body = generate_body()
-    self.headers = {'Content-Type': 'application/json'}
-
-    try:
-        self.response = requests.post(TURF_API_USERS_URL, headers=self.headers, json=self.body, timeout=2)
-
-        if self.response.status_code == 200:
-            update_stats_in_redis(self.response.json())
-
-        else:
-            log.warning('Got status code %s but 200 was expected.', self.response.status_code)
-
-    except requests.exceptions.RequestException as errormsg:
-        log.error(errormsg)
 
 def generate_response(metric):
     """ Returns response for specific metric """
