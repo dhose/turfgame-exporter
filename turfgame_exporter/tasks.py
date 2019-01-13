@@ -4,7 +4,7 @@ import requests
 
 @celery.task(bind=True)
 def get_users_statistics(self):
-    """ Scheduled task that every CHECK_INTERVAL_SEC updates statistics from Turf API """
+    """ Scheduled task that every CHECK_INTERVAL_SEC updates user statistics from Turf API """
     self.body = generate_body()
     self.headers = {'Content-Type': 'application/json'}
 
