@@ -1,6 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 from .main import celery, generate_body, update_stats_in_redis, TURF_API_USERS_URL
 import requests
+import logging
+
+log = logging.getLogger(__name__)
 
 @celery.task(bind=True)
 def get_users_statistics(self):
