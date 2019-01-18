@@ -110,20 +110,18 @@ def generate_response(metric):
         metric['type'].lower()))
 
     for user in TURF_USERS:
-        try:
-            value = REDISCONN.get('{}.{}.{}'.format(REDIS_KEY_PREFIX, user, metric['turf_name']))
+        redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user, metric['turf_name'])
+        value = REDISCONN.get(redis_key)
+
+        if value == None:
+            log.error('Key %s does not exist in Redis.', redis_key)
+
+        else:
             metric_response.append('{}_{}{{user="{}"}} {}'.format(
                 REDIS_KEY_PREFIX,
                 metric['prometheus_name'],
                 user,
                 int(value)))
-
-        except TypeError:
-            log.error('%s.%s.%s does not exist in Redis.',
-                      REDIS_KEY_PREFIX,
-                      user,
-                      metric['turf_name'])
-            continue
 
     return metric_response
 
