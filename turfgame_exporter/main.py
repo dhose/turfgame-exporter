@@ -88,14 +88,18 @@ def generate_body():
 
 def update_stats_in_redis(statistics):
     """ Updates keys in Redis for all metrics """
-    for user_stat in statistics:
-        for key, value in user_stat.items():
-            if key in METRIC_NAMES:
-                if key == 'zones':
-                    value = len(value)
+    if len(statistics) == 0:
+        log.warning('Got empty response from %s. Check if all usernames in TURF_USERS is valid.', TURF_API_USERS_URL)
 
-                redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
-                REDISCONN.set(redis_key, value)
+    else:
+        for user_stat in statistics:
+            for key, value in user_stat.items():
+                if key in METRIC_NAMES:
+                    if key == 'zones':
+                        value = len(value)
+
+                    redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
+                    REDISCONN.set(redis_key, value)
 
 def generate_response(metric):
     """ Returns response for specific metric """
