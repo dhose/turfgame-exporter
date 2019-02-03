@@ -27,7 +27,11 @@ $ git push turfgame_exporter master
 
 ## Configuration
 
-Configuration is done using environment variables.
+Configuration is done with environment variables using `dokku config:set`:
+
+```
+dokku config:set turfgame_exporter TURF_USERS=<turf username>
+```
 
 ### Required 
 
