@@ -33,7 +33,7 @@ Configuration is done with environment variables using `dokku config:set`:
 dokku config:set turfgame_exporter TURF_USERS=<turf username>
 ```
 
-### Required 
+### Required
 
 | Environment variable | Description                            |
 | -------------------- | -------------------------------------- |
@@ -80,5 +80,7 @@ turfgame_user_place{user="someuser"} 1774
 # HELP turfgame_user_unique_zones_taken Number of unique zones the user has taken
 # TYPE turfgame_user_unique_zones_taken counter
 turfgame_user_unique_zones_taken{user="someuser"} 263
+# HELP turfgame_user_medals_taken Number of medals the user has taken
+# TYPE turfgame_user_medals_taken counter
+turfgame_user_medals_taken{user="someuser"} 16
 ```
-
