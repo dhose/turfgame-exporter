@@ -73,7 +73,10 @@ ACCEPTED_METRICS = [
      'type': 'gauge', 'help': 'The users place'},
 
     {'turf_name': 'uniqueZonesTaken', 'prometheus_name': 'unique_zones_taken',
-     'type': 'counter', 'help': 'Number of unique zones the user has taken'}
+     'type': 'counter', 'help': 'Number of unique zones the user has taken'},
+
+     {'turf_name': 'medals', 'prometheus_name': 'medals_taken',
+      'type': 'counter', 'help': 'Number of medals the user has taken'}
 ]
 
 METRIC_NAMES = [metric['turf_name'] for metric in ACCEPTED_METRICS]
@@ -95,7 +98,7 @@ def update_stats_in_redis(statistics):
         for user_stat in statistics:
             for key, value in user_stat.items():
                 if key in METRIC_NAMES:
-                    if key == 'zones':
+                    if key in ['zones', 'medals']:
                         value = len(value)
 
                     redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
