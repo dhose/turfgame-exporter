@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-This application exposes user metrics from Turf to Prometheus].
+This application exposes user metrics from Turf to Prometheus.
 """
 
 import os
