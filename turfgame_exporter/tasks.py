@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-from .main import celery, generate_body, update_stats_in_redis, TURF_API_USERS_URL
+from turfgame_exporter.main import celery, generate_body, update_stats_in_redis, TURF_API_USERS_URL
 from turfgame_exporter import PROJECT_NAME, PROJECT_URL
 import requests
 import logging
