@@ -47,7 +47,7 @@ celery.autodiscover_tasks(['turfgame_exporter'])
 
 REDIS_KEY_PREFIX = 'turfgame_user'
 
-ACCEPTED_METRICS = [
+ENABLED_METRICS = [
     {'turf_name': 'zones', 'prometheus_name': 'zones_owned',
      'type': 'gauge', 'help': 'Number of zones owned'},
 
@@ -79,7 +79,7 @@ ACCEPTED_METRICS = [
       'type': 'counter', 'help': 'Number of medals the user has taken'}
 ]
 
-METRIC_NAMES = [metric['turf_name'] for metric in ACCEPTED_METRICS]
+METRIC_NAMES = [metric['turf_name'] for metric in ENABLED_METRICS]
 
 def generate_body():
     """ Returns the HTTP body sent to Turf API """
@@ -137,7 +137,7 @@ def expose_metrics():
     """ Returns all metrics when /metrics HTTP endpoint is accessed """
     response = []
 
-    for metric in ACCEPTED_METRICS:
+    for metric in ENABLED_METRICS:
         response = response + generate_response(metric)
 
     return '\n'.join(response), {'Content-Type': 'text/plain'}
