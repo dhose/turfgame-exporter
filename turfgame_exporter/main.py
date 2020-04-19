@@ -9,6 +9,7 @@ import os
 import logging
 import sys
 import datetime
+import json
 from flask import Flask
 from celery import Celery
 import redis
@@ -80,6 +81,8 @@ ENABLED_METRICS = [
 ]
 
 METRIC_NAMES = [metric['turf_name'] for metric in ENABLED_METRICS]
+METRIC_NAMES_MAP = {k['turf_name']: k['prometheus_name'] for k in [i for i in ENABLED_METRICS]}
+
 
 def generate_body():
     """ Returns the HTTP body sent to Turf API """
@@ -96,56 +99,72 @@ def update_stats_in_redis(statistics):
 
     else:
         for user_stat in statistics:
+            user_dict = {}
+
             for key, value in user_stat.items():
                 if key in METRIC_NAMES:
                     if key in ['zones', 'medals']:
                         value = len(value)
 
-                    redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name'], key)
-                    REDISCONN.set(redis_key, value)
+                    user_dict[METRIC_NAMES_MAP[key]] = value
+            REDISCONN.set('{}.{}'.format(REDIS_KEY_PREFIX, user_stat['name']), json.dumps(user_dict))
 
-def generate_response(metric):
+
+def generate_response():
     """ Returns response for specific metric """
-    metric_response = []
-    metric_response.append('# HELP {}_{} {}'.format(
-        REDIS_KEY_PREFIX,
-        metric['prometheus_name'],
-        metric['help']))
-    metric_response.append('# TYPE {}_{} {}'.format(
-        REDIS_KEY_PREFIX,
-        metric['prometheus_name'],
-        metric['type'].lower()))
+
+    response = []
+    user_statistics = {}
+    failed_users = []
 
     for user in TURF_USERS:
-        redis_key = '{}.{}.{}'.format(REDIS_KEY_PREFIX, user, metric['turf_name'])
-        value = REDISCONN.get(redis_key)
+        data = REDISCONN.get('{}.{}'.format(REDIS_KEY_PREFIX, user))
 
-        if value == None:
-            log.error('Key %s does not exist in Redis.', redis_key)
+        try:
+            json_data = json.loads(data)
+
+        except TypeError as errormsg:
+            log.error('Error when retrieving data for user {}'.format(user), errormsg)
+            failed_users.append(user)
+            continue
 
         else:
-            metric_response.append('{}_{}{{user="{}"}} {}'.format(
-                REDIS_KEY_PREFIX,
-                metric['prometheus_name'],
-                user,
-                int(value)))
+            user_statistics[user] = json_data
 
-    return metric_response
+    for metric in ENABLED_METRICS:
+        response.append('# HELP {}_{} {}'.format(
+            REDIS_KEY_PREFIX,
+            metric['prometheus_name'],
+            metric['help']))
+
+        response.append('# TYPE {}_{} {}'.format(
+            REDIS_KEY_PREFIX,
+            metric['prometheus_name'],
+            metric['type'].lower()))
+
+        for key, value in user_statistics.items():
+            if key not in failed_users:
+                response.append('{}_{}{{user="{}"}} {}'.format(
+                    REDIS_KEY_PREFIX,
+                    metric['prometheus_name'],
+                    key,
+                    value[metric['prometheus_name']]))
+
+    return response
+
 
 @app.route('/metrics')
 def expose_metrics():
     """ Returns all metrics when /metrics HTTP endpoint is accessed """
-    response = []
 
-    for metric in ENABLED_METRICS:
-        response = response + generate_response(metric)
+    return '\n'.join(generate_response()), {'Content-Type': 'text/plain'}
 
-    return '\n'.join(response), {'Content-Type': 'text/plain'}
 
 @app.route('/ping')
 def ping():
     """ Returns success when /ping HTTP endpoint is accessed """
     return 'success'
+
 
 if __name__ == "__main__":
     app.run()
