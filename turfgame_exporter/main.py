@@ -33,8 +33,8 @@ REDISCONN = redis.from_url(REDIS_URL)
 app = Flask(__name__)
 
 # Celery configuration
-app.config['CELERY_BROKER_URL'] = REDIS_URL
-app.config['CELERYBEAT_SCHEDULE'] = {
+app.config['broker_url'] = REDIS_URL
+app.config['beat_schedule'] = {
     'get_users_statistics': {
         'task': 'turfgame_exporter.tasks.get_users_statistics',
         'schedule': datetime.timedelta(seconds=(int(CHECK_INTERVAL_SEC))),
@@ -42,7 +42,7 @@ app.config['CELERYBEAT_SCHEDULE'] = {
 }
 
 # Initialize Celery
-celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery = Celery(app.name, broker=app.config['broker_url'])
 celery.conf.update(app.config)
 celery.autodiscover_tasks(['turfgame_exporter'])
 
