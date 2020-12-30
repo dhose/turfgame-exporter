@@ -7,22 +7,22 @@ Flask application that exposes user metrics from [Turf](https://turfgame.com/) t
 ###### On host running Dokku
 
 ```
-$ dokku apps:create turfgame_exporter && \
-  dokku redis:create turfgame_exporter && \
-  dokku redis:link turfgame_exporter turfgame_exporter && \
-  dokku config:set turfgame_exporter TURF_USERS=<turf username>
+$ dokku apps:create turfgame-exporter && \
+  dokku redis:create turfgame-exporter && \
+  dokku redis:link turfgame-exporter turfgame-exporter && \
+  dokku config:set turfgame-exporter TURF_USERS=<turf username>
 ```
 
 ###### In a directory containing a clone of this repository
 
 ```
-git remote add turfgame_exporter dokku@<host_running_dokku>:turfgame_exporter
+git remote add turfgame-exporter dokku@<host_running_dokku>:turfgame-exporter
 ```
 
 ###### Deploy with git push
 
 ```
-$ git push turfgame_exporter master
+$ git push turfgame-exporter master
 ```
 
 ## Configuration
@@ -30,7 +30,7 @@ $ git push turfgame_exporter master
 Configuration is done with environment variables using `dokku config:set`:
 
 ```
-dokku config:set turfgame_exporter TURF_USERS=<turf username>
+dokku config:set turfgame-exporter TURF_USERS=<turf username>
 ```
 
 ### Required
