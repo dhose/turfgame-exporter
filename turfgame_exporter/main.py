@@ -157,7 +157,7 @@ def generate_response():
 def expose_metrics():
     """ Returns all metrics when /metrics HTTP endpoint is accessed """
 
-    return '\n'.join(generate_response()), {'Content-Type': 'text/plain'}
+    return '\n'.join(generate_response()), {'Content-Type': 'text/plain; charset=utf-8'}
 
 
 @app.route('/ping')
