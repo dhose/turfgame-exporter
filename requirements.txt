@@ -8,9 +8,9 @@ amqp==5.0.6
     # via kombu
 billiard==3.6.4.0
     # via celery
-celery==5.0.5
+celery==5.1.0
     # via -r requirements.in
-certifi==2020.12.5
+certifi==2021.5.30
     # via requests
 chardet==4.0.0
     # via requests
@@ -18,7 +18,7 @@ click-didyoumean==0.0.3
     # via celery
 click-plugins==1.1.1
     # via celery
-click-repl==0.1.6
+click-repl==0.2.0
     # via celery
 click==7.1.2
     # via
@@ -27,19 +27,19 @@ click==7.1.2
     #   click-plugins
     #   click-repl
     #   flask
-flask==1.1.2
+flask==2.0.1
     # via -r requirements.in
 gunicorn==20.1.0
     # via -r requirements.in
 idna==2.10
     # via requests
-itsdangerous==1.1.0
+itsdangerous==2.0.1
     # via flask
-jinja2==2.11.3
+jinja2==3.0.1
     # via flask
-kombu==5.0.2
+kombu==5.1.0
     # via celery
-markupsafe==1.1.1
+markupsafe==2.0.1
     # via jinja2
 prompt-toolkit==3.0.18
     # via click-repl
@@ -49,17 +49,18 @@ redis==3.5.3
     # via -r requirements.in
 requests==2.25.1
     # via -r requirements.in
-six==1.15.0
+six==1.16.0
     # via click-repl
-urllib3==1.26.4
+urllib3==1.26.5
     # via requests
 vine==5.0.0
     # via
     #   amqp
     #   celery
+    #   kombu
 wcwidth==0.2.5
     # via prompt-toolkit
-werkzeug==1.0.1
+werkzeug==2.0.1
     # via flask
 
 # The following packages are considered to be unsafe in a requirements file:

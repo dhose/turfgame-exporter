@@ -12,9 +12,9 @@ billiard==3.6.4.0
     # via
     #   -r requirements.txt
     #   celery
-celery==5.0.5
+celery==5.1.0
     # via -r requirements.txt
-certifi==2020.12.5
+certifi==2021.5.30
     # via
     #   -r requirements.txt
     #   requests
@@ -30,7 +30,7 @@ click-plugins==1.1.1
     # via
     #   -r requirements.txt
     #   celery
-click-repl==0.1.6
+click-repl==0.2.0
     # via
     #   -r requirements.txt
     #   celery
@@ -43,7 +43,7 @@ click==7.1.2
     #   click-repl
     #   flask
     #   pip-tools
-flask==1.1.2
+flask==2.0.1
     # via -r requirements.txt
 gunicorn==20.1.0
     # via -r requirements.txt
@@ -51,25 +51,25 @@ idna==2.10
     # via
     #   -r requirements.txt
     #   requests
-itsdangerous==1.1.0
+itsdangerous==2.0.1
     # via
     #   -r requirements.txt
     #   flask
-jinja2==2.11.3
+jinja2==3.0.1
     # via
     #   -r requirements.txt
     #   flask
-kombu==5.0.2
+kombu==5.1.0
     # via
     #   -r requirements.txt
     #   celery
-markupsafe==1.1.1
+markupsafe==2.0.1
     # via
     #   -r requirements.txt
     #   jinja2
 pep517==0.10.0
     # via pip-tools
-pip-tools==6.0.1
+pip-tools==6.1.0
     # via -r requirements-dev.in
 prompt-toolkit==3.0.18
     # via
@@ -83,13 +83,13 @@ redis==3.5.3
     # via -r requirements.txt
 requests==2.25.1
     # via -r requirements.txt
-six==1.15.0
+six==1.16.0
     # via
     #   -r requirements.txt
     #   click-repl
 toml==0.10.2
     # via pep517
-urllib3==1.26.4
+urllib3==1.26.5
     # via
     #   -r requirements.txt
     #   requests
@@ -98,11 +98,12 @@ vine==5.0.0
     #   -r requirements.txt
     #   amqp
     #   celery
+    #   kombu
 wcwidth==0.2.5
     # via
     #   -r requirements.txt
     #   prompt-toolkit
-werkzeug==1.0.1
+werkzeug==2.0.1
     # via
     #   -r requirements.txt
     #   flask
