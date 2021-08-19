@@ -12,13 +12,13 @@ billiard==3.6.4.0
     # via
     #   -r requirements.txt
     #   celery
-celery==5.1.0
+celery==5.1.2
     # via -r requirements.txt
 certifi==2021.5.30
     # via
     #   -r requirements.txt
     #   requests
-chardet==4.0.0
+charset-normalizer==2.0.4
     # via
     #   -r requirements.txt
     #   requests
@@ -47,7 +47,7 @@ flask==2.0.1
     # via -r requirements.txt
 gunicorn==20.1.0
     # via -r requirements.txt
-idna==2.10
+idna==3.2
     # via
     #   -r requirements.txt
     #   requests
@@ -67,11 +67,11 @@ markupsafe==2.0.1
     # via
     #   -r requirements.txt
     #   jinja2
-pep517==0.10.0
+pep517==0.11.0
     # via pip-tools
-pip-tools==6.1.0
+pip-tools==6.2.0
     # via -r requirements-dev.in
-prompt-toolkit==3.0.18
+prompt-toolkit==3.0.19
     # via
     #   -r requirements.txt
     #   click-repl
@@ -81,15 +81,15 @@ pytz==2021.1
     #   celery
 redis==3.5.3
     # via -r requirements.txt
-requests==2.25.1
+requests==2.26.0
     # via -r requirements.txt
 six==1.16.0
     # via
     #   -r requirements.txt
     #   click-repl
-toml==0.10.2
+tomli==1.2.1
     # via pep517
-urllib3==1.26.5
+urllib3==1.26.6
     # via
     #   -r requirements.txt
     #   requests
@@ -107,6 +107,8 @@ werkzeug==2.0.1
     # via
     #   -r requirements.txt
     #   flask
+wheel==0.37.0
+    # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
