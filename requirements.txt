@@ -8,11 +8,11 @@ amqp==5.0.6
     # via kombu
 billiard==3.6.4.0
     # via celery
-celery==5.1.0
+celery==5.1.2
     # via -r requirements.in
 certifi==2021.5.30
     # via requests
-chardet==4.0.0
+charset-normalizer==2.0.4
     # via requests
 click-didyoumean==0.0.3
     # via celery
@@ -31,7 +31,7 @@ flask==2.0.1
     # via -r requirements.in
 gunicorn==20.1.0
     # via -r requirements.in
-idna==2.10
+idna==3.2
     # via requests
 itsdangerous==2.0.1
     # via flask
@@ -41,17 +41,17 @@ kombu==5.1.0
     # via celery
 markupsafe==2.0.1
     # via jinja2
-prompt-toolkit==3.0.18
+prompt-toolkit==3.0.19
     # via click-repl
 pytz==2021.1
     # via celery
 redis==3.5.3
     # via -r requirements.in
-requests==2.25.1
+requests==2.26.0
     # via -r requirements.in
 six==1.16.0
     # via click-repl
-urllib3==1.26.5
+urllib3==1.26.6
     # via requests
 vine==5.0.0
     # via
