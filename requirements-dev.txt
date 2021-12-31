@@ -14,7 +14,7 @@ billiard==3.6.4.0
     #   celery
 celery==5.2.3
     # via -r requirements.txt
-certifi==2021.5.30
+certifi==2021.10.8
     # via
     #   -r requirements.txt
     #   requests
