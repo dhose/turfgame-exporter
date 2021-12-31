@@ -43,6 +43,10 @@ click-repl==0.2.0
     # via
     #   -r requirements.txt
     #   celery
+deprecated==1.2.13
+    # via
+    #   -r requirements.txt
+    #   redis
 flask==2.0.2
     # via -r requirements.txt
 gunicorn==20.1.0
@@ -67,6 +71,10 @@ markupsafe==2.0.1
     # via
     #   -r requirements.txt
     #   jinja2
+packaging==21.3
+    # via
+    #   -r requirements.txt
+    #   redis
 pep517==0.11.0
     # via pip-tools
 pip-tools==6.4.0
@@ -75,11 +83,15 @@ prompt-toolkit==3.0.19
     # via
     #   -r requirements.txt
     #   click-repl
+pyparsing==3.0.6
+    # via
+    #   -r requirements.txt
+    #   packaging
 pytz==2021.3
     # via
     #   -r requirements.txt
     #   celery
-redis==3.5.3
+redis==4.1.0
     # via -r requirements.txt
 requests==2.26.0
     # via -r requirements.txt
@@ -109,6 +121,10 @@ werkzeug==2.0.2
     #   flask
 wheel==0.37.0
     # via pip-tools
+wrapt==1.13.3
+    # via
+    #   -r requirements.txt
+    #   deprecated
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

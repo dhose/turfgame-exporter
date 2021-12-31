@@ -27,6 +27,8 @@ click-plugins==1.1.1
     # via celery
 click-repl==0.2.0
     # via celery
+deprecated==1.2.13
+    # via redis
 flask==2.0.2
     # via -r requirements.in
 gunicorn==20.1.0
@@ -41,11 +43,15 @@ kombu==5.2.3
     # via celery
 markupsafe==2.0.1
     # via jinja2
+packaging==21.3
+    # via redis
 prompt-toolkit==3.0.19
     # via click-repl
+pyparsing==3.0.6
+    # via packaging
 pytz==2021.3
     # via celery
-redis==3.5.3
+redis==4.1.0
     # via -r requirements.in
 requests==2.26.0
     # via -r requirements.in
@@ -62,6 +68,8 @@ wcwidth==0.2.5
     # via prompt-toolkit
 werkzeug==2.0.2
     # via flask
+wrapt==1.13.3
+    # via deprecated
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
