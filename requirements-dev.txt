@@ -89,7 +89,7 @@ six==1.16.0
     #   click-repl
 tomli==1.2.1
     # via pep517
-urllib3==1.26.6
+urllib3==1.26.7
     # via
     #   -r requirements.txt
     #   requests
