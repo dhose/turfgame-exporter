@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements-dev.in
 #
-amqp==5.0.6
+amqp==5.0.9
     # via
     #   -r requirements.txt
     #   kombu
@@ -12,7 +12,7 @@ billiard==3.6.4.0
     # via
     #   -r requirements.txt
     #   celery
-celery==5.1.2
+celery==5.2.3
     # via -r requirements.txt
 certifi==2021.5.30
     # via
@@ -22,7 +22,7 @@ charset-normalizer==2.0.4
     # via
     #   -r requirements.txt
     #   requests
-click==7.1.2
+click==8.0.3
     # via
     #   -r requirements.txt
     #   celery
@@ -59,7 +59,7 @@ jinja2==3.0.3
     # via
     #   -r requirements.txt
     #   flask
-kombu==5.1.0
+kombu==5.2.3
     # via
     #   -r requirements.txt
     #   celery
@@ -75,7 +75,7 @@ prompt-toolkit==3.0.19
     # via
     #   -r requirements.txt
     #   click-repl
-pytz==2021.1
+pytz==2021.3
     # via
     #   -r requirements.txt
     #   celery
