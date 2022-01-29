@@ -25,6 +25,9 @@ git remote add turfgame-exporter dokku@<host_running_dokku>:turfgame-exporter
 $ git push turfgame-exporter master
 ```
 
+## Deployment using [Heroku](https://www.heroku.com/)
+https://devcenter.heroku.com/articles/getting-started-with-python
+
 ## Configuration
 
 Configuration is done with environment variables using `dokku config:set`:
