@@ -10,7 +10,8 @@ Flask application that exposes user metrics from [Turf](https://turfgame.com/) t
 $ dokku apps:create turfgame-exporter && \
   dokku redis:create turfgame-exporter && \
   dokku redis:link turfgame-exporter turfgame-exporter && \
-  dokku config:set turfgame-exporter TURF_USERS=<turf username>
+  dokku config:set turfgame-exporter TURF_USERS=<turf username> && \
+  dokku ps:scale turfgame-exporter beat=1 web=1 worker=1
 ```
 
 ###### In a directory containing a clone of this repository
