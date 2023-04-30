@@ -16,6 +16,10 @@ billiard==3.6.4.0
     # via
     #   -r requirements.txt
     #   celery
+blinker==1.6.2
+    # via
+    #   -r requirements.txt
+    #   flask
 build==0.10.0
     # via pip-tools
 celery==5.2.7
@@ -24,7 +28,7 @@ certifi==2022.12.7
     # via
     #   -r requirements.txt
     #   requests
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via
     #   -r requirements.txt
     #   requests
@@ -49,7 +53,7 @@ click-repl==0.2.0
     # via
     #   -r requirements.txt
     #   celery
-flask==2.2.2
+flask==2.3.1
     # via -r requirements.txt
 gunicorn==20.1.0
     # via -r requirements.txt
@@ -78,19 +82,19 @@ packaging==23.1
     # via build
 pip-tools==6.13.0
     # via -r requirements-dev.in
-prompt-toolkit==3.0.36
+prompt-toolkit==3.0.38
     # via
     #   -r requirements.txt
     #   click-repl
 pyproject-hooks==1.0.0
     # via build
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   -r requirements.txt
     #   celery
-redis==4.4.2
+redis==4.5.4
     # via -r requirements.txt
-requests==2.28.2
+requests==2.29.0
     # via -r requirements.txt
 six==1.16.0
     # via
@@ -98,7 +102,7 @@ six==1.16.0
     #   click-repl
 tomli==2.0.1
     # via build
-urllib3==1.26.14
+urllib3==1.26.15
     # via
     #   -r requirements.txt
     #   requests
@@ -112,7 +116,7 @@ wcwidth==0.2.6
     # via
     #   -r requirements.txt
     #   prompt-toolkit
-werkzeug==2.2.2
+werkzeug==2.3.2
     # via
     #   -r requirements.txt
     #   flask
